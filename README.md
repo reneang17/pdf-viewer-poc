@@ -20,23 +20,27 @@ A modern React-based PDF viewer component built with PDF.js. This project demons
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (version 16 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/reneang17/pdf-viewer-poc.git
 cd pdf-viewer-poc
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
