@@ -2,13 +2,14 @@
 // src/components/PDFViewer/PDFViewer.jsx
 import React, { useState, useEffect } from 'react';
 import FileUploader from './FileUploader';
+import PDFSelector from './PDFSelector';
 import PageNavigation from './PageNavigation';
 import PDFCanvas from './PDFCanvas';
 import ErrorMessage from './ErrorMessage';
 import { loadPdfJs } from './utils/pdfLoader';
 import { defaultStyles } from './styles/defaultStyles';
 
-const PDFViewer = ({ styles = {} }) => {
+const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
   const [pdfDoc, setPdfDoc] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -55,6 +56,16 @@ const PDFViewer = ({ styles = {} }) => {
           setLoading={setLoading}
           styles={mergedStyles}
         />
+        
+        {apiBaseUrl && (
+          <PDFSelector 
+            onFileLoad={handleFileLoad}
+            onError={setError}
+            setLoading={setLoading}
+            styles={mergedStyles}
+            apiBaseUrl={apiBaseUrl}
+          />
+        )}
         
         {pdfDoc && (
           <PageNavigation 

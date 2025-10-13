@@ -21,6 +21,12 @@ export const defaultStyles = {
       alignItems: 'center'
     },
     
+    pdfSelector: {
+      display: 'flex',
+      gap: '8px',
+      alignItems: 'center'
+    },
+    
     label: {
       fontSize: '14px',
       fontWeight: '500'
@@ -31,6 +37,14 @@ export const defaultStyles = {
       border: '1px solid #ccc',
       borderRadius: '4px',
       fontSize: '14px'
+    },
+    
+    select: {
+      padding: '6px',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      fontSize: '14px',
+      minWidth: '200px'
     },
     
     navigation: {

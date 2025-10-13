@@ -6,7 +6,9 @@ function App() {
   return (
     <div>
       <h1>PDF Viewer POC</h1>
-      <PDFViewer />
+      <PDFViewer 
+        apiBaseUrl="https://pdf-storage-api.vercel.app/api"
+      />
     </div>
   );
 }
