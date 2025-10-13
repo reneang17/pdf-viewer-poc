@@ -1,13 +1,12 @@
-
 // src/components/PDFViewer/PDFViewer.jsx
-import React, { useState, useEffect } from 'react';
-import FileUploader from './FileUploader';
-import PDFSelector from './PDFSelector';
-import PageNavigation from './PageNavigation';
-import PDFCanvas from './PDFCanvas';
-import ErrorMessage from './ErrorMessage';
-import { loadPdfJs } from './utils/pdfLoader';
-import { defaultStyles } from './styles/defaultStyles';
+import React, { useState, useEffect } from "react";
+import FileUploader from "./FileUploader";
+import PDFSelector from "./PDFSelector";
+import PageNavigation from "./PageNavigation";
+import PDFCanvas from "./PDFCanvas";
+import ErrorMessage from "./ErrorMessage";
+import { loadPdfJs } from "./utils/pdfLoader";
+import { defaultStyles } from "./styles/defaultStyles";
 
 const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
   const [pdfDoc, setPdfDoc] = useState(null);
@@ -15,17 +14,17 @@ const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   // Merge user styles with defaults
   const mergedStyles = {
     ...defaultStyles,
-    ...styles
+    ...styles,
   };
 
   useEffect(() => {
     // Pre-load PDF.js library
-    loadPdfJs().catch(err => {
-      setError('Failed to load PDF.js library');
+    loadPdfJs().catch((err) => {
+      setError("Failed to load PDF.js library");
     });
   }, []);
 
@@ -48,17 +47,17 @@ const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
   return (
     <div style={mergedStyles.container}>
       <ErrorMessage error={error} styles={mergedStyles} />
-      
+
       <div style={mergedStyles.controls}>
-        <FileUploader 
+        <FileUploader
           onFileLoad={handleFileLoad}
           onError={setError}
           setLoading={setLoading}
           styles={mergedStyles}
         />
-        
+
         {apiBaseUrl && (
-          <PDFSelector 
+          <PDFSelector
             onFileLoad={handleFileLoad}
             onError={setError}
             setLoading={setLoading}
@@ -66,9 +65,9 @@ const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
             apiBaseUrl={apiBaseUrl}
           />
         )}
-        
+
         {pdfDoc && (
-          <PageNavigation 
+          <PageNavigation
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
@@ -76,8 +75,8 @@ const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
           />
         )}
       </div>
-      
-      <PDFCanvas 
+
+      <PDFCanvas
         pdfDoc={pdfDoc}
         pageNum={currentPage}
         loading={loading}

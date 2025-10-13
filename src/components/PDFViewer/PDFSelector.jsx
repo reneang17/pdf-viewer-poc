@@ -1,10 +1,16 @@
 // src/components/PDFViewer/PDFSelector.jsx
-import React, { useState, useEffect } from 'react';
-import { fetchPDFsFromAPI, loadPdfFromUrl } from './utils/pdfApiLoader';
+import React, { useState, useEffect } from "react";
+import { fetchPDFsFromAPI, loadPdfFromUrl } from "./utils/pdfApiLoader";
 
-const PDFSelector = ({ onFileLoad, onError, setLoading, styles, apiBaseUrl }) => {
+const PDFSelector = ({
+  onFileLoad,
+  onError,
+  setLoading,
+  styles,
+  apiBaseUrl,
+}) => {
   const [pdfs, setPdfs] = useState([]);
-  const [selectedPdfId, setSelectedPdfId] = useState('');
+  const [selectedPdfId, setSelectedPdfId] = useState("");
   const [loadingPdfs, setLoadingPdfs] = useState(false);
 
   useEffect(() => {
@@ -26,7 +32,7 @@ const PDFSelector = ({ onFileLoad, onError, setLoading, styles, apiBaseUrl }) =>
   const handlePDFSelect = async (e) => {
     const pdfId = e.target.value;
     setSelectedPdfId(pdfId);
-    
+
     if (!pdfId) return;
 
     setLoading(true);
@@ -51,7 +57,9 @@ const PDFSelector = ({ onFileLoad, onError, setLoading, styles, apiBaseUrl }) =>
         style={styles.select}
         disabled={loadingPdfs}
       >
-        <option value="">{loadingPdfs ? 'Loading PDFs...' : 'Choose a PDF'}</option>
+        <option value="">
+          {loadingPdfs ? "Loading PDFs..." : "Choose a PDF"}
+        </option>
         {pdfs.map((pdf) => (
           <option key={pdf.id} value={pdf.id}>
             {pdf.title} ({pdf.filename})
@@ -63,3 +71,4 @@ const PDFSelector = ({ onFileLoad, onError, setLoading, styles, apiBaseUrl }) =>
 };
 
 export default PDFSelector;
+

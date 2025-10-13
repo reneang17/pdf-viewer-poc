@@ -1,7 +1,7 @@
 // src/components/PDFViewer/utils/pdfApiLoader.js
-import { loadPdfJs } from './pdfLoader';
+import { loadPdfJs } from "./pdfLoader";
 
-const API_BASE_URL = 'https://pdf-storage-api.vercel.app/api';
+const API_BASE_URL = "https://pdf-storage-api.vercel.app/api";
 
 /**
  * Fetches list of PDFs from the API
@@ -11,17 +11,17 @@ const API_BASE_URL = 'https://pdf-storage-api.vercel.app/api';
 export const fetchPDFsFromAPI = async (baseUrl = API_BASE_URL) => {
   try {
     const response = await fetch(`${baseUrl}/pdfs`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to fetch PDFs');
+      throw new Error(result.error || "Failed to fetch PDFs");
     }
-    
+
     return result.data || [];
   } catch (error) {
     throw new Error(`Failed to fetch PDFs: ${error.message}`);
@@ -37,17 +37,17 @@ export const fetchPDFsFromAPI = async (baseUrl = API_BASE_URL) => {
 export const getPDFDownloadUrl = async (pdfId, baseUrl = API_BASE_URL) => {
   try {
     const response = await fetch(`${baseUrl}/pdfs/${pdfId}/download`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to get download URL');
+      throw new Error(result.error || "Failed to get download URL");
     }
-    
+
     return result.data.url;
   } catch (error) {
     throw new Error(`Failed to get download URL: ${error.message}`);
@@ -62,11 +62,11 @@ export const getPDFDownloadUrl = async (pdfId, baseUrl = API_BASE_URL) => {
  */
 export const loadPdfFromUrl = async (pdfId, baseUrl = API_BASE_URL) => {
   const pdfjsLib = await loadPdfJs();
-  
+
   try {
     // Get the download URL
     const downloadUrl = await getPDFDownloadUrl(pdfId, baseUrl);
-    
+
     // Load PDF from URL
     const pdf = await pdfjsLib.getDocument(downloadUrl).promise;
     return pdf;
@@ -74,3 +74,4 @@ export const loadPdfFromUrl = async (pdfId, baseUrl = API_BASE_URL) => {
     throw new Error(`Failed to load PDF from API: ${error.message}`);
   }
 };
+
