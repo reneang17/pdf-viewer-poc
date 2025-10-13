@@ -1,30 +1,30 @@
-
 // src/components/PDFViewer/PDFViewer.jsx
-import React, { useState, useEffect } from 'react';
-import FileUploader from './FileUploader';
-import PageNavigation from './PageNavigation';
-import PDFCanvas from './PDFCanvas';
-import ErrorMessage from './ErrorMessage';
-import { loadPdfJs } from './utils/pdfLoader';
-import { defaultStyles } from './styles/defaultStyles';
+import React, { useState, useEffect } from "react";
+import FileUploader from "./FileUploader";
+import PDFSelector from "./PDFSelector";
+import PageNavigation from "./PageNavigation";
+import PDFCanvas from "./PDFCanvas";
+import ErrorMessage from "./ErrorMessage";
+import { loadPdfJs } from "./utils/pdfLoader";
+import { defaultStyles } from "./styles/defaultStyles";
 
-const PDFViewer = ({ styles = {} }) => {
+const PDFViewer = ({ styles = {}, apiBaseUrl }) => {
   const [pdfDoc, setPdfDoc] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   // Merge user styles with defaults
   const mergedStyles = {
     ...defaultStyles,
-    ...styles
+    ...styles,
   };
 
   useEffect(() => {
     // Pre-load PDF.js library
-    loadPdfJs().catch(err => {
-      setError('Failed to load PDF.js library');
+    loadPdfJs().catch((err) => {
+      setError("Failed to load PDF.js library");
     });
   }, []);
 
@@ -47,17 +47,27 @@ const PDFViewer = ({ styles = {} }) => {
   return (
     <div style={mergedStyles.container}>
       <ErrorMessage error={error} styles={mergedStyles} />
-      
+
       <div style={mergedStyles.controls}>
-        <FileUploader 
+        <FileUploader
           onFileLoad={handleFileLoad}
           onError={setError}
           setLoading={setLoading}
           styles={mergedStyles}
         />
-        
+
+        {apiBaseUrl && (
+          <PDFSelector
+            onFileLoad={handleFileLoad}
+            onError={setError}
+            setLoading={setLoading}
+            styles={mergedStyles}
+            apiBaseUrl={apiBaseUrl}
+          />
+        )}
+
         {pdfDoc && (
-          <PageNavigation 
+          <PageNavigation
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
@@ -65,8 +75,8 @@ const PDFViewer = ({ styles = {} }) => {
           />
         )}
       </div>
-      
-      <PDFCanvas 
+
+      <PDFCanvas
         pdfDoc={pdfDoc}
         pageNum={currentPage}
         loading={loading}
