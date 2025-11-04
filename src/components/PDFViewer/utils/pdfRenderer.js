@@ -19,10 +19,22 @@ export const renderPdfPage = async (pdfDoc, pageNum, canvas, scale = 1.5) => {
     // Set viewport with scale
     const viewport = page.getViewport({ scale });
     
+    // Get device pixel ratio for high-DPI displays
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    
     // Prepare canvas
     const context = canvas.getContext('2d');
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+    
+    // Set canvas internal resolution (higher for high-DPI)
+    canvas.width = viewport.width * devicePixelRatio;
+    canvas.height = viewport.height * devicePixelRatio;
+    
+    // Scale CSS size back to viewport size
+    canvas.style.width = viewport.width + 'px';
+    canvas.style.height = viewport.height + 'px';
+    
+    // Scale the context to handle device pixel ratio
+    context.scale(devicePixelRatio, devicePixelRatio);
     
     // Render PDF page to canvas
     const renderContext = {
