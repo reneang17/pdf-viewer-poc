@@ -6,9 +6,9 @@ A modern React-based PDF viewer component built with PDF.js. This project demons
 
 - 📄 PDF file upload and viewing
 - 🧭 Page navigation (Previous/Next/Go to page)
-- �� Responsive design
+- 📱 Responsive design
 - ⚡ Fast rendering with PDF.js
-- �� Clean, modern UI
+- ✨ Clean, modern UI
 
 ## Technologies Used
 
