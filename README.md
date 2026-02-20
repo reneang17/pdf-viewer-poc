@@ -2,7 +2,11 @@
 
 A modern React-based PDF viewer component built with PDF.js. This project demonstrates how to create an interactive PDF viewer with navigation controls and file upload functionality.
 
-**The main feature of this PDF reader is its universality—it is designed to work seamlessly across any browser and device.** While native or built-in PDF readers on browsers and mobile devices (like Preview) often only retain partial functionality, this viewer ensures that both functionality and aesthetics are fully preserved. To solve such lack of universality, this tool comes to the rescue.
+**The main feature of this PDF reader is its universality—it is designed to work seamlessly across any browser and device.** While native or built-in PDF readers on browsers and mobile devices (like Preview) often only retain partial functionality, this viewer ensures that both functionality and aesthetics are fully preserved. To solve such lack of universality, this tool comes to the rescue. 
+
+While other iterations of this project (e.g. [forestViewer](https://github.com/reneang17/forestViewer) and [spotlight](https://github.com/reneang17/spotlight)) focused more on aesthetics and UI/UX, this repo and [pdf-storage-api](https://github.com/reneang17/pdf-storage-api) iteration focuses on creating a full back and front end, to demonstrate the feasibility of making this reader a service.
+
+If you are interested in seeing this project workign visit [pdf-viewer-poc](https://reneang17.github.io/pdf-viewer-poc/).
 
 ## Features
 
